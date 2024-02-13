@@ -30,7 +30,7 @@ export default function CookiesAlert() {
     <>
       <Alert
         open={open}
-        className="max-w-screen-md absolute bottom-0 fixed"
+        className="max-w-screen-md absolute bottom-0 fixed z-50"
         icon={<Icon />}
       >
         <Typography variant="h5" color="white">
