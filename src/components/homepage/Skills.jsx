@@ -44,11 +44,11 @@ export default function Skills() {
     },
   ];
   return (
-    <Tabs value="hardSkills">
+    <Tabs value="hardSkills" className="w-2/3">
       <TabsHeader>
         {data.map(({ label, value, icon }) => (
           <Tab key={value} value={value}>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center">
               {React.createElement(icon, { className: "w-5 h-5" })}
               {label}
             </div>
