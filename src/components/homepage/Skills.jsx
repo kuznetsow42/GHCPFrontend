@@ -9,10 +9,11 @@ import {
 import {
   Square3Stack3DIcon,
   UserCircleIcon,
+  Cog6ToothIcon,
   CodeBracketIcon,
 } from "@heroicons/react/24/solid";
-
-export default function Projects() {
+ 
+export default function Skills() {
   const data = [
     {
       label: "Hard skills",
@@ -35,23 +36,19 @@ export default function Projects() {
       to follow my dreams and inspire other people to follow their dreams, too.`,
     },
     {
-      label: "Projects",
-      value: "projects",
+      label: "Soft Skills",
+      value: "qwe",
       icon: CodeBracketIcon,
-      desc: `We're not always in the position that we want to be at.
-      We're constantly growing. We're constantly making mistakes. We're
-      constantly trying to express ourselves and actualize our dreams.`,
+      desc: `Because it's about motivating the doers. Because I'm here
+      to follow my dreams and inspire other people to follow their dreams, too.`,
     },
   ];
   return (
-    <Tabs value="dashboard" className="w-full">
-      <h3 className="text-4xl font-bold tracking-tight text-white sm:text-6xl pb-4">
-        Skills
-      </h3>
+    <Tabs value="hardSkills">
       <TabsHeader>
         {data.map(({ label, value, icon }) => (
           <Tab key={value} value={value}>
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               {React.createElement(icon, { className: "w-5 h-5" })}
               {label}
             </div>
@@ -60,7 +57,7 @@ export default function Projects() {
       </TabsHeader>
       <TabsBody>
         {data.map(({ value, desc }) => (
-          <TabPanel key={value} value={value} className="">
+          <TabPanel key={value} value={value}>
             {desc}
           </TabPanel>
         ))}
