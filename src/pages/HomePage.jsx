@@ -1,26 +1,24 @@
+import { useQuery } from "@tanstack/react-query";
 import Career from "../components/homepage/Career";
 import Header from "../components/homepage/Header";
 import Messanger from "../components/homepage/Messanger";
 import Projects from "../components/homepage/Skills";
-
-const links = [
-  { name: "Open roles", href: "#" },
-  { name: "Internship program", href: "#" },
-  { name: "Our values", href: "#" },
-  { name: "Meet our leadership", href: "#" },
-];
-const stats = [
-  { name: "Years old", value: "20" },
-  { name: "Years of commercial expirience", value: "0 (yet)" },
-  { name: "Employers", value: "0" },
-  { name: "Languages", value: "3" },
-  { name: "Timezone differense", value: "+6 hrs" },
-];
+import axios from "axios";
 
 export default function HomePage() {
+  const query = useQuery({
+    queryKey: ["basics"],
+    queryFn: () => axios.get("basics/").then((res) => res.data),
+  });
+  if (query.isError) return <h4>{query.error}</h4>;
+
   return (
     <div>
-      <Header />
+      {query.isLoading ? (
+        <p className="bg-yellow-700 text-center text-7xl p-10">Loading</p>
+      ) : (
+        <Header data={query.data} />
+      )}
       <div className="bg-purple-900 pb-10">
         <div className="flex flex-col md:flex-row p-2 gap-8">
           <Projects />
