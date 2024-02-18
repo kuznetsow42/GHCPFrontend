@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Career from "../components/homepage/Career";
 import Header from "../components/homepage/Header";
 import Messanger from "../components/homepage/Messanger";
-import Projects from "../components/homepage/Skills";
+import Skills from "../components/homepage/Skills";
 import axios from "axios";
 
 export default function HomePage() {
@@ -10,22 +10,23 @@ export default function HomePage() {
     queryKey: ["basics"],
     queryFn: () => axios.get("basics/").then((res) => res.data),
   });
-  if (query.isError) return <h4>{query.error}</h4>;
 
-  return (
-    <div>
-      {query.isLoading ? (
-        <p className="bg-yellow-700 text-center text-7xl p-10">Loading</p>
-      ) : (
+  if (query.isFetched) {
+    return (
+      <div>
         <Header data={query.data} />
-      )}
-      <div className="bg-purple-900 pb-10">
-        <div className="flex flex-col md:flex-row p-2 gap-8">
-          <Projects />
-          <Career />
+        <div className="bg-purple-900 pb-10">
+          <div className="flex flex-row flex-wrap p-2 gap-8 items-stretch justify-between w-full">
+            <Skills
+              hardSkills={query.data.hard_skills}
+              softSkills={query.data.soft_skills}
+              languages={query.data.languages}
+            />
+            <Career />
+          </div>
         </div>
+        <Messanger />
       </div>
-      <Messanger />
-    </div>
-  );
+    );
+  }
 }

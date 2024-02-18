@@ -9,42 +9,47 @@ import {
 import {
   Square3Stack3DIcon,
   UserCircleIcon,
-  Cog6ToothIcon,
-  CodeBracketIcon,
+  LanguageIcon,
 } from "@heroicons/react/24/solid";
- 
-export default function Skills() {
+import { HardSkill } from "./skills/HardSkill";
+import SoftSkill from "./skills/SoftSkill";
+import { Language } from "./skills/Language";
+
+export default function Skills({ hardSkills, softSkills, languages }) {
   const data = [
     {
       label: "Hard skills",
       value: "hardSkills",
       icon: Square3Stack3DIcon,
       desc: (
-        <button
-          type="button"
-          class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2"
-        >
-          Django
-        </button>
+        <div>
+          {hardSkills.map((skill) => (
+            <HardSkill skill={skill} />
+          ))}
+        </div>
       ),
+    },
+    {
+      label: "Languages",
+      value: "languages",
+      icon: LanguageIcon,
+      desc: <div>{languages.map((lang) => <Language lang={lang} />)}</div>,
     },
     {
       label: "Soft Skills",
       value: "softSkills",
       icon: UserCircleIcon,
-      desc: `Because it's about motivating the doers. Because I'm here
-      to follow my dreams and inspire other people to follow their dreams, too.`,
-    },
-    {
-      label: "Soft Skills",
-      value: "qwe",
-      icon: CodeBracketIcon,
-      desc: `Because it's about motivating the doers. Because I'm here
-      to follow my dreams and inspire other people to follow their dreams, too.`,
+      desc: (
+        <div className="bg-white p-10">
+          {softSkills.map((skill) => (
+            <SoftSkill skill={skill} />
+          ))}
+        </div>
+      ),
     },
   ];
   return (
-    <Tabs value="hardSkills" className="w-2/3">
+    <Tabs value="hardSkills" className="flex-1">
       <TabsHeader>
         {data.map(({ label, value, icon }) => (
           <Tab key={value} value={value}>
