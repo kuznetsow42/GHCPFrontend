@@ -5,6 +5,7 @@ import {
   ButtonGroup,
   Typography,
 } from "@material-tailwind/react";
+import { useCookies } from "react-cookie";
 
 function Icon() {
   return (
@@ -24,28 +25,36 @@ function Icon() {
 }
 
 export default function CookiesAlert() {
-  const [open, setOpen] = React.useState(true);
+  const [cookies, setCookie] = useCookies(["cookieConsent"]);
+  const [open, setOpen] = React.useState(!cookies.cookieConsent);
+
+  const acceptCookies = () => {
+    setCookie("cookieConsent", true, { path: "/" });
+    setOpen(false);
+  };
 
   return (
-    <>
-      <Alert
-        open={open}
-        className="max-w-screen-md absolute bottom-0 fixed z-50"
-        icon={<Icon />}
-      >
-        <Typography variant="h5" color="white">
-          Cookies
-        </Typography>
-        <Typography color="white" className="mt-2 font-normal">
-          I don&apos;t know what that word means. I&apos;m happy. But success,
-          that goes back to what in somebody&apos;s eyes success means. For me,
-          success is inner peace. That&apos;s a good day for me.
-        </Typography>
-        <div className="flex justify-end">
-          <Button color="red" size="lg" onClick={() => setOpen(false)}>Disagree</Button>
-          <Button color="green" size="lg" onClick={() => setOpen(false)}>Agree</Button>
-        </div>
-      </Alert>
-    </>
+    <Alert
+      open={open}
+      className="max-w-screen-sm absolute bottom-0 fixed z-50"
+      icon={<Icon />}
+    >
+      <Typography variant="h5" color="white">
+        Cookies
+      </Typography>
+      <Typography color="white" className="mt-2 font-normal">
+        I don&apos;t know what that word means. I&apos;m happy. But success,
+        that goes back to what in somebody&apos;s eyes success means. For me,
+        success is inner peace. That&apos;s a good day for me.
+      </Typography>
+      <div className="flex justify-end">
+        <Button color="red" size="lg" onClick={() => setOpen(false)}>
+          Disagree
+        </Button>
+        <Button color="green" size="lg" onClick={acceptCookies}>
+          Agree
+        </Button>
+      </div>
+    </Alert>
   );
 }
