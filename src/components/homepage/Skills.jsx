@@ -33,7 +33,7 @@ export default function Skills({ hardSkills, softSkills, languages }) {
       label: "Languages",
       value: "languages",
       icon: LanguageIcon,
-      desc: <div>{languages.map((lang) => <Language lang={lang} />)}</div>,
+      desc: <div className="flex flex-col gap-3">{languages.map((lang) => <Language lang={lang} />)}</div>,
     },
     {
       label: "Soft Skills",
