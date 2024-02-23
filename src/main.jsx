@@ -8,6 +8,7 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import axios from "axios";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CookiesProvider } from "react-cookie";
+import ProjectPage from "./pages/ProjectPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <HomePage />,
+      },
+      {
+        path: "projects",
+        element: <ProjectPage />,
       },
     ],
   },
