@@ -1,12 +1,3 @@
-import {
-  List,
-  ListItem,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-  ListItemPrefix,
-} from "@material-tailwind/react";
-
 const product = {
   name: "Basic Tee 6-Pack",
   price: "$192",
@@ -84,9 +75,8 @@ export function ProjectCard({ project }) {
               <h3 className="text-2xl text-center font-medium text-gray-900">
                 Tools
               </h3>
-
               {project.tools.map((tool) => (
-                <button className="flex w-full my-4 items-center gap-2 p-4 py-1.5 text-sm text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-300 active:bg-indigo-700">
+                <button key={tool.id} className="flex w-full my-4 items-center gap-2 p-4 py-1.5 text-sm text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-300 active:bg-indigo-700">
                   <img src={tool.icon} width={28} />
                   {tool.name}
                 </button>
