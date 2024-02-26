@@ -18,80 +18,29 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
-  Bars4Icon,
-  GlobeAmericasIcon,
-  NewspaperIcon,
   PhoneIcon,
-  RectangleGroupIcon,
-  SquaresPlusIcon,
-  SunIcon,
-  TagIcon,
-  UserGroupIcon,
 } from "@heroicons/react/24/solid";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import StartChat from "../chat/ChatLink";
 
 const navListMenuItems = [
   {
-    title: "Products",
+    title: "Telegram",
     description: "Find the perfect solution for your needs.",
-    icon: SquaresPlusIcon,
+    icon: <PhoneIcon width={48} />,
+    link: "/telegram.com"
   },
-  {
-    title: "About Us",
-    description: "Meet and learn about our dedication",
-    icon: UserGroupIcon,
-  },
-  {
-    title: "Blog",
-    description: "Find the perfect solution for your needs.",
-    icon: Bars4Icon,
-  },
-  {
-    title: "Services",
-    description: "Learn how we can help you achieve your goals.",
-    icon: SunIcon,
-  },
-  {
-    title: "Support",
-    description: "Reach out to us for assistance or inquiries",
-    icon: GlobeAmericasIcon,
-  },
-  {
-    title: "Contact",
-    description: "Find the perfect solution for your needs.",
-    icon: PhoneIcon,
-  },
-  {
-    title: "News",
-    description: "Read insightful articles, tips, and expert opinions.",
-    icon: NewspaperIcon,
-  },
-  {
-    title: "Products",
-    description: "Find the perfect solution for your needs.",
-    icon: RectangleGroupIcon,
-  },
-  {
-    title: "Special Offers",
-    description: "Explore limited-time deals and bundles",
-    icon: TagIcon,
-  },
+  
 ];
 
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const renderItems = navListMenuItems.map(
-    ({ icon, title, description }, key) => (
-      <a href="#" key={key}>
+    ({ icon, title, description, link }, key) => (
+      <Link to={link} key={key}>
         <MenuItem className="flex items-center gap-3 rounded-lg">
-          <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
-            {" "}
-            {React.createElement(icon, {
-              strokeWidth: 2,
-              className: "h-6 text-gray-900 w-6",
-            })}
-          </div>
+          {icon}
           <div>
             <Typography
               variant="h6"
@@ -108,7 +57,7 @@ function NavListMenu() {
             </Typography>
           </div>
         </MenuItem>
-      </a>
+      </Link>
     )
   );
 
@@ -146,6 +95,7 @@ function NavListMenu() {
         </MenuHandler>
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
           <ul className="grid grid-cols-3 gap-y-2 outline-none outline-0">
+            <StartChat />
             {renderItems}
           </ul>
         </MenuList>
