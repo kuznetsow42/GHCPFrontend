@@ -12,48 +12,52 @@ export default function ChatLink() {
       .post("chat/create/")
       .then((response) => setCookie("chat", response.data.UUID, { path: "/" }));
 
-  if (!cookies.chat)
-    <MenuItem
-      className="flex items-center gap-3 rounded-lg"
-      onClick={create_chat}
-    >
-      <ChatBubbleBottomCenterIcon color="red" width={48} />
-      <div>
-        <Typography
-          variant="h6"
-          color="blue-gray"
-          className="flex items-center text-sm font-bold"
-        >
-          StartChat
-        </Typography>
-        <Typography
-          variant="paragraph"
-          className="text-xs !font-medium text-blue-gray-500"
-        >
-          descr
-        </Typography>
-      </div>
-    </MenuItem>;
-  else {
-    <Link to="/chat">
-      <MenuItem className="flex items-center gap-3 rounded-lg">
-        <ChatBubbleBottomCenterIcon color="green" width={48} />
+  if (!cookies.chat) {
+    return (
+      <MenuItem
+        className="flex items-center gap-3 rounded-lg"
+        onClick={create_chat}
+      >
+        <ChatBubbleBottomCenterIcon color="red" width={48} />
         <div>
           <Typography
             variant="h6"
             color="blue-gray"
             className="flex items-center text-sm font-bold"
           >
-            Open chat
+            StartChat
           </Typography>
           <Typography
             variant="paragraph"
             className="text-xs !font-medium text-blue-gray-500"
           >
-            description
+            descr
           </Typography>
         </div>
       </MenuItem>
-    </Link>
+    );
+  } else {
+    return (
+      <Link to="/chat">
+        <MenuItem className="flex items-center gap-3 rounded-lg">
+          <ChatBubbleBottomCenterIcon color="green" width={48} />
+          <div>
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="flex items-center text-sm font-bold"
+            >
+              Open chat
+            </Typography>
+            <Typography
+              variant="paragraph"
+              className="text-xs !font-medium text-blue-gray-500"
+            >
+              description
+            </Typography>
+          </div>
+        </MenuItem>
+      </Link>
+    );
   }
 }
