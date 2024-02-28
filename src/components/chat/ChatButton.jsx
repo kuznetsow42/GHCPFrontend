@@ -4,15 +4,15 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 
-export default function ChatLink() {
-  const [cookies, setCookie] = useCookies(["chat"]);
+export default function ChatBitton() {
+  const [cookies, setCookie] = useCookies(["chatCreated"]);
 
   const create_chat = () =>
-    axios
-      .post("chat/create/")
-      .then((response) => setCookie("chat", response.data.UUID, { path: "/" }));
+    axios.post("chat/create/", {}, {withCredentials: true}).then(() => {
+      setCookie("chatCreated", true, { path: "/" });
+    });
 
-  if (!cookies.chat) {
+  if (!cookies.chatCreated) {
     return (
       <MenuItem
         className="flex items-center gap-3 rounded-lg"

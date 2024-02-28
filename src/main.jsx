@@ -9,6 +9,7 @@ import axios from "axios";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CookiesProvider } from "react-cookie";
 import ProjectPage from "./pages/ProjectPage.jsx";
+import ChatPage from "./pages/ChatPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         path: "projects",
         element: <ProjectPage />,
       },
+      {
+        path: "chat",
+        element: <ChatPage />
+      }
     ],
   },
 ]);

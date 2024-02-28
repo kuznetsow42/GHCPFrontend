@@ -21,7 +21,7 @@ import {
   PhoneIcon,
 } from "@heroicons/react/24/solid";
 import { Link, NavLink } from "react-router-dom";
-import StartChat from "../chat/ChatLink";
+import ChatButton from "../chat/ChatButton";
 
 const navListMenuItems = [
   {
@@ -95,7 +95,7 @@ function NavListMenu() {
         </MenuHandler>
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
           <ul className="grid grid-cols-3 gap-y-2 outline-none outline-0">
-            <StartChat />
+            <ChatButton />
             {renderItems}
           </ul>
         </MenuList>
