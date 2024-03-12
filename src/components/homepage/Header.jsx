@@ -59,8 +59,8 @@ export default function Header({ data }) {
       </div>
       <img
         alt="My photo"
-        src={data.photo}
-        className="max-h-full w-full rounded-lg object-cover object-center shadow-xl shadow-blue-gray-900/50"
+        src="src/assets/photos/me.jpg"
+        className="max-h-screen w-1/2 object-cover object-center shadow-xl shadow-blue-gray-900/50"
       />
     </section>
   );
