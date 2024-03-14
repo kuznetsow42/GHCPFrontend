@@ -20,7 +20,7 @@ const currentYear = new Date().getFullYear();
 
 export default function Footer() {
   return (
-    <footer className="pt-20 w-full bg-[url('src/assets/bg/footer.jpg')] bg-cover">
+    <footer className="pt-20 w-full bg-[url('src/assets/bg/footer.jpg')] bg-cover sticky top-[100vh]">
       
       <div className="mx-auto w-full max-w-7xl px-6">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
