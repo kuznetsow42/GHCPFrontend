@@ -3,7 +3,6 @@ import {
   Navbar,
   Collapse,
   Typography,
-  Button,
   IconButton,
   List,
   ListItem,
@@ -17,9 +16,7 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import {
-  PhoneIcon,
-} from "@heroicons/react/24/solid";
+import { PhoneIcon } from "@heroicons/react/24/solid";
 import { Link, NavLink } from "react-router-dom";
 import ChatButton from "../chat/ChatButton";
 
@@ -28,9 +25,8 @@ const navListMenuItems = [
     title: "Telegram",
     description: "Find the perfect solution for your needs.",
     icon: <PhoneIcon width={48} />,
-    link: "/telegram.com"
+    link: "/telegram.com",
   },
-  
 ];
 
 function NavListMenu() {
@@ -110,7 +106,7 @@ function NavListMenu() {
 function NavList() {
   return (
     <List className="mt-4 mb-6 gap-4 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 items-center text-black">
-      <NavLink to="/" >Home</NavLink>
+      <NavLink to="/">Home</NavLink>
       <NavLink to="/projects">Projects</NavLink>
       <NavListMenu />
     </List>
@@ -150,14 +146,6 @@ export default function NavbarWithMegaMenu() {
       <Collapse open={openNav}>
         <div className="overflow-y-auto max-h-64">
           <NavList />
-        </div>
-        <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
-            Log In
-          </Button>
-          <Button variant="gradient" size="sm" fullWidth>
-            Sign In
-          </Button>
         </div>
       </Collapse>
     </Navbar>
