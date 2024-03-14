@@ -1,22 +1,17 @@
 import { Typography, MenuItem } from "@material-tailwind/react";
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
+import { createChat } from "../../utils/chatAPI";
 
 export default function ChatBitton() {
   const [cookies, setCookie] = useCookies(["chatCreated"]);
-
-  const create_chat = () =>
-    axios.post("chat/create/", {}, {withCredentials: true}).then(() => {
-      setCookie("chatCreated", true, { path: "/" });
-    });
 
   if (!cookies.chatCreated) {
     return (
       <MenuItem
         className="flex items-center gap-3 rounded-lg"
-        onClick={create_chat}
+        onClick={() => createChat(setCookie)}
       >
         <ChatBubbleBottomCenterIcon color="red" width={48} />
         <div>

@@ -1,19 +1,13 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
+import { sendMessage } from "../../utils/chatAPI";
 
 export default function ChatInput() {
-  const sendMessage = (e) => {
-    e.preventDefault();
-    let formData = new FormData(e.target);
-    axios.post("chat/", formData, { withCredentials: true });
-  };
-
   return (
     <form onSubmit={sendMessage} className="flex mt-10">
-      <label className="text-gray-700 w-full" for="message">
+      <label className="text-gray-700 w-full" htmlFor="message">
         <textarea
-          className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          className="flex-1 w-full px-4 py-`2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
           id="message"
           placeholder="Enter your message"
           name="message"
@@ -23,7 +17,7 @@ export default function ChatInput() {
         <div className="max-w-2xl mx-auto">
           <label
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            for="file_input"
+            htmlFor="file_input"
           >
             Upload file
           </label>
