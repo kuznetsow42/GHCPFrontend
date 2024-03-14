@@ -1,7 +1,7 @@
 import { Button } from "@material-tailwind/react";
+import { Navigate } from "react-router-dom";
 
 export default function Header({ data }) {
-
   const stats = [
     { name: "Years old", value: data.birth_date },
     {
@@ -37,10 +37,21 @@ export default function Header({ data }) {
         </div>
         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
           <div className="flex gap-4 flex-wrap justify-center">
-            {links.map((link) => (
-              <Button key={link.name} variant="gradient" color="green">
-                {link.name}
-              </Button>
+            {data.links.map((link) => (
+              <a href={link.url} target="_blank">
+                <Button
+                  color="green"
+                  key={link.id}
+                  className="flex items-center gap-3 px-4"
+                >
+                  <img
+                    src={link.icon}
+                    alt="metamask"
+                    className="max-h-8 max-w-20"
+                  />
+                  {link.name}
+                </Button>
+              </a>
             ))}
           </div>
           <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4 items-start">
