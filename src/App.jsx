@@ -6,7 +6,7 @@ import CookiesAlert from './components/dialogs/CookiesAlert'
 
 function App() {
   return (
-    <div className='min-h-screen'>
+    <div className='h-screen bg-gray-700'>
       <NavbarWithMegaMenu />
       <CookiesAlert />
       <Outlet />
