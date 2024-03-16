@@ -1,3 +1,6 @@
+import { Button, ButtonGroup, Tooltip } from "@material-tailwind/react";
+import { UserGroupIcon, UserIcon } from "@heroicons/react/24/outline";
+
 const product = {
   name: "Basic Tee 6-Pack",
   price: "$192",
@@ -32,107 +35,61 @@ const product = {
 
 export function ProjectCard({ project }) {
   return (
-    <div className="bg-white border px-4 mb-4">
-      <div>
-        <div className="mx-auto mt-2 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-            <img
-              src={product.images[0].src}
-              alt={product.images[0].alt}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-          <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-              <img
-                src={product.images[1].src}
-                alt={product.images[1].alt}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-              <img
-                src={product.images[2].src}
-                alt={product.images[2].alt}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-          </div>
-          <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-            <img
-              src={product.images[3].src}
-              alt={product.images[3].alt}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
+    <div class=" rounded-md bg-gray-900 shadow-lg sm:mx-4 my-6">
+      <div class="md:flex">
+        <div class="flex-none">
+          <img
+            src={project.image}
+            alt="pic"
+            class="h-72 w-96 rounded-md shadow-2xl transform  border-4 border-gray-300 shadow-lg"
+          />
         </div>
-        <p className="w-full text-4xl tracking-tight text-gray-900 text-center mt-2 mb-6 bg-gray-300">
-            {project.name}
-          </p>
-        <div className="mx-auto max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-14 lg:pt-6">
-          <div className="order-last lg:row-span-3 lg:mt-0">
-            <div>
-              <h3 className="text-2xl text-center font-medium text-gray-900">
-                Tools
-              </h3>
-              {project.tools.map((tool) => (
-                <button key={tool.id} className="flex w-full my-4 items-center gap-2 p-4 py-1.5 text-sm text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-300 active:bg-indigo-700">
-                  <img src={tool.icon} width={28} />
-                  {tool.name}
-                </button>
-              ))}
-            </div>
-            <h3 className="text-2xl text-center font-medium text-gray-900 mt-10">
-              Links
+        <div class="flex-col text-gray-300">
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <h3 class="text-2xl font-bold flex gap-2">
+              {project.pet ? (
+                <Tooltip content="My own project">
+                  <UserIcon width={22} color="yellow" />
+                </Tooltip>
+              ) : (
+                <Tooltip content="Company's project">
+                  <UserGroupIcon width={22} color="green" />
+                </Tooltip>
+              )}
+              {project.name}
+
             </h3>
-            <a
-              href={project.link}
-              className="my-4 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              GitHub
-            </a>
-            {project.demo && (
-              <a
-                href={project.demo}
-                className="flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-8 py-3 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-              >
-                Demo
-              </a>
-            )}
+            <ButtonGroup color="red">
+              {!project.demo && (
+                <a href={project.demo} target="_blank">
+                  <Button >Demo</Button>
+                </a>
+              )}
+              {project.link && (
+                <a href={project.link} target="_blank">
+                  <Button >GitHub</Button>
+                </a>
+              )}
+            </ButtonGroup>
           </div>
-          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-            {/* Description and details */}
-            <div>
-              <h3 className="sr-only">Description</h3>
+          <hr class="hr-text" data-content="" />
+          <p class="md:block px-4 my-4 text-sm text-left">
+            In Gotham City, mentally troubled comedian Arthur Fleck is
+            disregarded and mistreated by society. He then embarks on a downward
+            spiral of revolution and bloody crime. This path brings him
+            face-to-face with his alter-ego: the Joker.{" "}
+          </p>
 
-              <div className="space-y-6">
-                <p className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                  {project.description}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-10">
-              <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
-
-              <div className="mt-4">
-                <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {product.highlights.map((highlight) => (
-                    <li key={highlight} className="text-gray-400">
-                      <span className="text-gray-600">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-10">
-              <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-              <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{product.details}</p>
-              </div>
-            </div>
+          <div class="text-xs self-end">
+            {project.tools.map((tool) => (
+              <button
+                key={tool.id}
+                type="button"
+                class="border border-gray-400 text-gray-400 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-900 focus:outline-none focus:shadow-outline"
+              >
+                {tool.name}
+              </button>
+            ))}
           </div>
         </div>
       </div>
