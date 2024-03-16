@@ -2,15 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProjectCard } from "../components/projects/ProjectCard";
-import {
-  Button,
-  Checkbox,
-  Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-  IconButton,
-} from "@material-tailwind/react";
+import { Button, IconButton } from "@material-tailwind/react";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
 
 export default function ProjectPage() {
   const projectsQuery = useQuery({
@@ -46,69 +39,80 @@ export default function ProjectPage() {
     <div>
       {projectsQuery.isFetched && skillsQuery.isFetched && (
         <section className="bg-gray-50">
-          <div className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-            <div className="md:flex md:items-end md:justify-between">
-              <div className="max-w-xl">
-                <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                  Read trusted reviews from our customers
-                </h2>
-
-                <p className="mt-6 max-w-lg leading-relaxed text-gray-700">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aspernatur praesentium natus sapiente commodi. Aliquid sunt
-                  tempore iste repellendus explicabo dignissimos placeat, autem
-                  harum dolore reprehenderit quis! Quo totam dignissimos earum.
-                </p>
-              </div>
-            </div>
-            <List className="flex-row-reverse flex-wrap" id="skillList">
+          <div className="mx-auto max-w-screen-2xl py-12">
+            <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-20">
+              My (mostly personal) projects
+            </h2>
+            <ul
+              className="flex flex-col sm:flex-row sm:items-end mb-1"
+              id="skillList"
+            >
+              <li>
+                <input
+                  type="checkbox"
+                  id="SelectAll"
+                  className="hidden peer"
+                  checked={selectedSkills.length === skillsQuery.data.length}
+                  onChange={(e) => {
+                    setSelectedSkills(
+                      e.target.checked
+                        ? skillsQuery.data.map((skill) => skill.id)
+                        : []
+                    );
+                  }}
+                />
+                <label
+                  htmlFor="SelectAll"
+                  className="inline-flex items-center justify-between w-full p-5 bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:text-red-900 peer-checked:border-blue-900"
+                >
+                  <div className="text-lg font-semibold">Select all</div>
+                </label>
+              </li>
               {skillsQuery.data.map((skill) => (
-                <ListItem className="p-0 w-28" key={skill.id}>
+                <li key={skill.id}>
+                  <input
+                    type="checkbox"
+                    id={skill.id}
+                    className="hidden peer"
+                    checked={selectedSkills.includes(skill.id)}
+                    onChange={(e) => {
+                      const updatedSkills = e.target.checked
+                        ? [...selectedSkills, skill.id]
+                        : selectedSkills.filter((id) => id !== skill.id);
+                      setSelectedSkills(updatedSkills);
+                    }}
+                  />
                   <label
                     htmlFor={skill.id}
-                    className="flex cursor-pointer items-center px-3 py-2"
+                    className="inline-flex items-center justify-between w-full p-5  bg-white border-2 border-gray-200 rounded-lg cursor-pointer hover:text-red-900 peer-checked:border-blue-900"
                   >
-                    <ListItemPrefix className="mr-3">
-                      <Checkbox
-                        id={skill.id}
-                        ripple={false}
-                        defaultChecked
-                        className="hover:before:opacity-0 checbox"
-                        containerProps={{
-                          className: "p-0",
-                        }}
-                        onChange={(e) => {
-                          const updatedSkills = e.target.checked
-                            ? [...selectedSkills, skill.id]
-                            : selectedSkills.filter((id) => id !== skill.id);
-
-                          setSelectedSkills(updatedSkills);
-                        }}
-                      />
-                    </ListItemPrefix>
-                    <Typography color="blue-gray" className="font-medium">
-                      {skill.name}
-                    </Typography>
+                    <div className="block">
+                      <img src={skill.icon} width={42} />
+                      <div className="w-full text-lg font-semibold">
+                        {skill.name}
+                      </div>
+                      <div className="w-full text-sm">{skill.description}</div>
+                    </div>
                   </label>
-                </ListItem>
+                </li>
               ))}
-            </List>
+            </ul>
+
             {projects.map((project) => (
               <ProjectCard project={project} key={project.id} />
             ))}
           </div>
-        </section>
-      )}
-      {selectedSkills.length > 0 && (
-        <div className="fixed z-90 bottom-12 right-8">
-          <IconButton
-            onClick={() =>
-              document.getElementById("skillList")?.scrollIntoView(false)
-            }
+          {selectedSkills.length !== skillsQuery.data.length && (
+        <div className="fixed z-50 bottom-12 right-8">
+          <Button
+            onClick={() => setSelectedSkills(skillsQuery.data.map((skill) => skill.id))}
+            color="blue"
           >
-            {selectedSkills.join(", ")}
-          </IconButton>
+            See all
+          </Button>
         </div>
+      )}
+        </section>
       )}
     </div>
   );
