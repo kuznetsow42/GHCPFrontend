@@ -1,5 +1,5 @@
 import { Typography } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const LINKS = [
   {
@@ -21,19 +21,17 @@ const currentYear = new Date().getFullYear();
 export default function Footer() {
   return (
     <footer className="pt-20 w-full bg-[url('src/assets/bg/footer.jpg')] bg-cover sticky top-[100vh]">
-      
       <div className="mx-auto w-full max-w-7xl px-6">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
-          <Typography className="text-green-600 text-6xl">
-            GHCP
+          <Typography className="flex flex-col text-6xl gap-4">
+            <NavLink to="/">GHCP</NavLink>
+            <NavLink to="/war" className="text-red-900 text-4xl">FUCK WAR!</NavLink>
           </Typography>
+
           <div className="grid grid-cols-3 justify-between gap-4">
             {LINKS.map(({ title, items }) => (
               <ul key={title}>
-                <Typography
-                  variant="small"
-                  className="mb-3 text-xl"
-                >
+                <Typography variant="small" className="mb-3 text-xl">
                   {title}
                 </Typography>
                 {items.map((link) => (

@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CookiesProvider } from "react-cookie";
 import ProjectPage from "./pages/ProjectPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
+import War from "./pages/War.jsx";
 
 const queryClient = new QueryClient();
 
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
       {
         path: "chat",
         element: <ChatPage />
-      }
+      },
+      {
+        path: "war",
+        element: <War />
+      },
     ],
   },
 ]);
