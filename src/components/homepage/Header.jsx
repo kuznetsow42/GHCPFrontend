@@ -1,5 +1,6 @@
 import { Button } from "@material-tailwind/react";
-import { Navigate } from "react-router-dom";
+
+import {DocumentCheckIcon, DocumentTextIcon, PhotoIcon} from "@heroicons/react/16/solid";
 
 export default function Header({ data }) {
   const stats = [
@@ -29,20 +30,24 @@ export default function Header({ data }) {
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
             Andrew Smith
-            <Button color="green">Free to hire</Button>
           </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-300">
-            {data.greating_message}
-          </p>
-        </div>
-        <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-          <div className="flex gap-4 flex-wrap justify-center">
+          <div className="flex gap-4 flex-wrap justify-center py-4">
+          <a href={data.resume} target="_blank">
+                <Button
+                  color="red"
+                  className="grid grid-cols-2 items-center"
+                >
+                  <DocumentTextIcon className="max-h-8 max-w-20" />
+                    
+                  Resume
+                </Button>
+              </a>
             {data.links.map((link) => (
               <a href={link.url} target="_blank">
                 <Button
                   color="green"
                   key={link.id}
-                  className="flex items-center gap-3 px-4"
+                  className="flex items-center gap-3"
                 >
                   <img
                     src={link.icon}
@@ -54,6 +59,12 @@ export default function Header({ data }) {
               </a>
             ))}
           </div>
+          <p className="mt-6 text-lg leading-8 text-gray-300">
+            {data.greating_message}
+          </p>
+        </div>
+        <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+          
           <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4 items-start">
             {stats.map((stat) => (
               <div key={stat.name} className="flex flex-col-reverse ">
