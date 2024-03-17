@@ -35,6 +35,10 @@ export default function ProjectPage() {
     }
   }, [projectsQuery.data, selectedSkills]);
 
+  const selectSkill = (id) => {
+    setSelectedSkills([id]);
+  }
+
   if (projectsQuery.isFetched && skillsQuery.isFetched)
     return (
         <div className="mx-auto p- bg-black">
@@ -88,7 +92,7 @@ export default function ProjectPage() {
           </ul>
 
           {projects.map((project) => (
-            <ProjectCard project={project} key={project.id} />
+            <ProjectCard project={project} key={project.id} selectSkill={selectSkill} />
           ))}
           </div>
     );

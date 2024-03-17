@@ -33,9 +33,9 @@ const product = {
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 };
 
-export function ProjectCard({ project }) {
+export function ProjectCard({ project, selectSkill }) {
   return (
-    <div class=" rounded-md bg-gray-900 shadow-lg sm:mx-4 my-6">
+    <div class="rounded-md bg-gray-900 shadow-lg sm:mx-4 border border-red-900">
       <div class="md:flex">
         <div class="flex-none">
           <img
@@ -57,17 +57,16 @@ export function ProjectCard({ project }) {
                 </Tooltip>
               )}
               {project.name}
-
             </h3>
             <ButtonGroup color="red">
-              {!project.demo && (
+              {project.demo && (
                 <a href={project.demo} target="_blank">
-                  <Button >Demo</Button>
+                  <Button>Demo</Button>
                 </a>
               )}
               {project.link && (
                 <a href={project.link} target="_blank">
-                  <Button >GitHub</Button>
+                  <Button>GitHub</Button>
                 </a>
               )}
             </ButtonGroup>
@@ -84,6 +83,7 @@ export function ProjectCard({ project }) {
             {project.tools.map((tool) => (
               <button
                 key={tool.id}
+                onClick={() => selectSkill(tool.id)}
                 type="button"
                 class="border border-gray-400 text-gray-400 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-900 focus:outline-none focus:shadow-outline"
               >
