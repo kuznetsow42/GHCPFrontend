@@ -1,9 +1,24 @@
-import { Button } from "@material-tailwind/react";
-
-import {DocumentCheckIcon, DocumentTextIcon, PhotoIcon} from "@heroicons/react/16/solid";
+import {
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  Button
+} from "@material-tailwind/react";
+import { ClipboardDocumentListIcon, DocumentTextIcon } from "@heroicons/react/16/solid";
 
 export default function Header({ data }) {
   const stats = [
+    {
+      name: "Phone number",
+      value: (
+        <Popover placement="right">
+          <PopoverHandler onClick={() => navigator.clipboard.writeText(data.phone)}>
+            <button className="text-lg p-0 flex">{data.phone}<ClipboardDocumentListIcon width={14} /></button>
+          </PopoverHandler>
+          <PopoverContent className="bg-black p-2 text-white">Copied!</PopoverContent>
+        </Popover>
+      ),
+    },
     { name: "Years old", value: data.birth_date },
     {
       name: "My timezone",
@@ -14,34 +29,26 @@ export default function Header({ data }) {
       value: data.greating_message,
     },
     { name: "Employers", value: "0" },
-    { name: "Languages", value: "3" },
-  ];
-
-  const links = [
-    { name: "Open roles", href: "#" },
-    { name: "Internship program", href: "#" },
-    { name: "Our values", href: "#" },
-    { name: "Meet our leadership", href: "#" },
+    {
+      name: "Languages",
+      value: data.languages.map((lang) => lang.name + ", "),
+    },
   ];
 
   return (
-    <section class="overflow-hidden bg-green-900 sm:flex sm:flex-row">
-      <div class="mx-auto max-w-xl text-center m-10">
+    <section className="overflow-hidden bg-green-900 text-white sm:flex sm:flex-row">
+      <div className="mx-auto max-w-xl text-center m-10">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            Andrew Smith
+          <h2 className="text-4xl font-bold tracking-tight   sm:text-6xl">
+            {`${data.first_name} ${data.last_name}`}
           </h2>
           <div className="flex gap-4 flex-wrap justify-center py-4">
-          <a href={data.resume} target="_blank">
-                <Button
-                  color="red"
-                  className="grid grid-cols-2 items-center"
-                >
-                  <DocumentTextIcon className="max-h-8 max-w-20" />
-                    
-                  Resume
-                </Button>
-              </a>
+            <a href={data.resume} target="_blank">
+              <Button color="red" className="grid grid-cols-2 items-center">
+                <DocumentTextIcon className="max-h-8 max-w-20" />
+                Resume
+              </Button>
+            </a>
             {data.links.map((link) => (
               <a href={link.url} target="_blank">
                 <Button
@@ -59,25 +66,23 @@ export default function Header({ data }) {
               </a>
             ))}
           </div>
-          <p className="mt-6 text-lg leading-8 text-gray-300">
+          <p className="mt-6 text-lg leading-8">
             {data.greating_message}
           </p>
         </div>
-        <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-          
-          <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4 items-start">
+          <ul className="mt-7 list-inside">
             {stats.map((stat) => (
-              <div key={stat.name} className="flex flex-col-reverse ">
-                <dt className="text-base leading-7 text-gray-300">
+              <li
+                key={stat.id}
+                className="flex mt-1 leading-normal   transition duration-100 ease-in  text-md print:"
+              >
+                <span className="mr-2 text-lg font-semibold text-yellow-900 leading-snugish">
                   {stat.name}
-                </dt>
-                <dd className="text-2xl font-bold leading-9 tracking-tight text-white">
-                  {stat.value}
-                </dd>
-              </div>
+                </span>
+                {stat.value}
+              </li>
             ))}
-          </dl>
-        </div>
+          </ul>
       </div>
       <img
         alt="My photo"
