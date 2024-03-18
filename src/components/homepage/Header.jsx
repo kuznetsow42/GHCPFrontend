@@ -36,7 +36,7 @@ export default function Header({ data }) {
   ];
 
   return (
-    <section className="overflow-hidden bg-green-900 text-white sm:flex sm:flex-row">
+    <section className="overflow-hidden bg-green-900 text-white flex flex-col md:flex-row items-center">
       <div className="mx-auto max-w-xl text-center m-10">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-4xl font-bold tracking-tight   sm:text-6xl">
@@ -84,11 +84,11 @@ export default function Header({ data }) {
             ))}
           </ul>
       </div>
-      <img
-        alt="My photo"
-        src="src/assets/photos/me.jpg"
-        className="max-h-screen w-1/2 object-cover object-center shadow-xl shadow-blue-gray-900/50"
-      />
+
+      <div class="md:w-1/2 lg:w-1/3 mt-8 md:mt-0">
+                <img src="src/assets/photos/main.jpg" alt="Hero Image" class="rounded-lg shadow-lg" />
+            </div>
     </section>
   );
 }
+
